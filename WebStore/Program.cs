@@ -1,3 +1,5 @@
+using Microsoft.AspNetCore.StaticFiles.Infrastructure;
+
 namespace WebStore
 {
     public class Program
@@ -15,6 +17,9 @@ namespace WebStore
             {
                 app.UseDeveloperExceptionPage();
             }
+
+            app.UseStaticFiles();
+            app.UseDefaultFiles();
 
             app.UseRouting();
 
