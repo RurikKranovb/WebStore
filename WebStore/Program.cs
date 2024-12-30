@@ -9,7 +9,25 @@ namespace WebStore
 
             var configuration = app.Configuration;
 
-            app.MapGet("/", () => "Hello World!");
+            //app.MapGet("/", () => "Hello World!");
+
+            if (builder.Environment.IsDevelopment())
+            {
+                app.UseDeveloperExceptionPage();
+            }
+
+            app.UseRouting();
+
+
+            var greetings = configuration["CustomGreetings"];
+
+            app.UseEndpoints(endpoints =>
+            {
+                endpoints.MapGet("/", async context =>
+                {
+                    await context.Response.WriteAsync(greetings);
+                });
+            });
 
             app.Run();
         }
